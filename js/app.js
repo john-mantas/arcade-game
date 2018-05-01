@@ -19,7 +19,7 @@ Enemy.prototype.update = function(dt) {
     // all computers.
     this.x = (this.x + this.speed) * dt;
 
-    if (this.x === player.x) && (this.y === player.y) {
+    if ((this.x === player.x) && (this.y === player.y)) {
         //collision
     }
 };
@@ -32,6 +32,51 @@ Enemy.prototype.render = function() {
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
+
+class Player {
+    constructor(x,y) {
+        this.sprite = 'images/char-boy.png';
+        this.x = x;
+        this.y = y;
+    }
+
+    update(dt) {
+        
+    }
+
+    render() {
+        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    }
+
+    handleInput(keyPressed) {
+        switch (keyPressed) {
+            case 'left':
+                if (this.x >= 101) {
+                    this.x -= 101;
+                    console.log('left');
+                }
+                break;
+            case 'up':
+                if (this.y >= 83) {
+                    this.y -= 83;
+                    console.log('up');
+                }
+                break;
+            case 'right':
+                if (this.x <= 303) {
+                    this.x += 101;
+                    console.log('right');
+                }
+                break;
+            case 'down':
+                if (this.y <= 332) {
+                    this.y += 83;
+                    console.log('down');
+                }
+                break;
+        }
+    }
+}
 
 
 // Now instantiate your objects.
