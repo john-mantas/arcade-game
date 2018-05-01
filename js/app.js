@@ -83,7 +83,13 @@ class Player {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
+const enemyTop = new Enemy(-101, 83 , 2);
+const enemyMiddle = new Enemy(-101, 166, 0.000015);
+const enemyBottom = new Enemy(-101, 249, 25);
 
+let allEnemies = [enemyTop, enemyMiddle, enemyBottom];
+
+const player = new Player(202, 332);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
