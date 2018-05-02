@@ -47,8 +47,13 @@ class Player {
         this.y = y;
     }
 
-    update(dt) {
-        
+    update() {
+        if (this.y === 0) {
+            setTimeout(function() {
+                player.resetToStart()
+            }, 300);
+            console.log('win');
+        }
     }
 
     render() {
