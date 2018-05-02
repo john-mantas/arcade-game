@@ -8,7 +8,7 @@ var Enemy = function(x, y, speed) {
     this.sprite = 'images/enemy-bug.png';
     this.x = x;
     this.y = y;
-    this.enSpeed = speed;
+    this.speed = speed;
 };
 
 // Update the enemy's position, required method for game
@@ -17,10 +17,16 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-    this.x = (this.x + this.speed) * dt;
+    this.x = this.x + this.speed * dt;
 
-    if ((this.x === player.x) && (this.y === player.y)) {
-        //collision
+    if (this.x > 505) { 
+        this.x = -101;
+    }
+
+    if (((parseInt(this.x + 70) > player.x && parseInt(this.x) < player.x) ||
+         (parseInt(this.x + 70) > player.x + 70 && parseInt(this.x) < player.x + 70)) &&
+        this.y === player.y) {
+        console.log('collision');
     }
 };
 
@@ -83,13 +89,20 @@ class Player {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
-const enemyTop = new Enemy(-101, 83 , 2);
-const enemyMiddle = new Enemy(-101, 166, 0.000015);
-const enemyBottom = new Enemy(-101, 249, 25);
+const enemyTop = new Enemy(-101, 83 , getRandom(100,300));
+const enemyMiddle = new Enemy(-101, 166, getRandom(100,300));
+const enemyBottom = new Enemy(-101, 249, getRandom(100,300));
 
 let allEnemies = [enemyTop, enemyMiddle, enemyBottom];
 
 const player = new Player(202, 332);
+
+//Randomize function from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+function getRandom(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
