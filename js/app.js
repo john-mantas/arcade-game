@@ -19,13 +19,14 @@ Enemy.prototype.update = function(dt) {
     // all computers.
     this.x = this.x + this.speed * dt;
 
-    if (this.x > 505) { 
+    if (this.x > 505) {
         this.x = -101;
     }
 
     if (((parseInt(this.x + 70) > player.x && parseInt(this.x) < player.x) ||
          (parseInt(this.x + 70) > player.x + 70 && parseInt(this.x) < player.x + 70)) &&
         this.y === player.y) {
+        player.resetToStart();
         console.log('collision');
     }
 };
@@ -81,6 +82,11 @@ class Player {
                 }
                 break;
         }
+    }
+
+    resetToStart() {
+        this.x = 202;
+        this.y = 332;
     }
 }
 
