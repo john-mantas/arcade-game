@@ -1,3 +1,33 @@
+//Home screen
+const charCont = document.getElementById('character');
+const arrowLeft = document.getElementById('arrow_left');
+const arrowRight = document.getElementById('arrow_right');
+const playerCharacters = [
+    'images/char-boy.png',
+    'images/char-cat-girl.png',
+    'images/char-horn-girl.png',
+    'images/char-pink-girl.png',
+    'images/char-princess-girl.png'
+];
+
+let charIndex = 0;
+
+arrowLeft.addEventListener('click', function() {
+    if (charIndex === 0) {
+        charIndex = playerCharacters.length;
+    }
+    charIndex--
+    charCont.setAttribute('src', playerCharacters[charIndex]);
+});
+
+arrowRight.addEventListener('click', function() {
+     if (charIndex === playerCharacters.length-1) {
+        charIndex = -1;
+    }
+    charIndex++
+    charCont.setAttribute('src', playerCharacters[charIndex]);
+});
+
 // Enemies our player must avoid
 var Enemy = function(x, y, speed) {
     // Variables applied to each of our instances go here,
