@@ -35,6 +35,11 @@ document.getElementById('home_play').addEventListener('click', function() {
     Engine(global);
 });
 
+// Game sounds
+let jumpSound = new Audio('sounds/jump.wav');
+let winSound = new Audio('sounds/win.wav');
+let collisionSound = new Audio('sounds/collision.wav');
+
 // Enemies our player must avoid
 var Enemy = function(x, y, speed) {
     // Variables applied to each of our instances go here,
@@ -64,6 +69,7 @@ Enemy.prototype.update = function(dt) {
          (parseInt(this.x + 70) > player.x + 70 && parseInt(this.x) < player.x + 70)) &&
         this.y === player.y) {
         player.resetToStart();
+        collisionSound.play();
         console.log('collision');
     }
 };
@@ -87,6 +93,7 @@ class Player {
 
     update() {
         if (this.y === 0) {
+            winSound.play();
             player.resetToStart()
             console.log('win');
             totalScore += 100;
@@ -102,24 +109,28 @@ class Player {
             case 'left':
                 if (this.x >= 101) {
                     this.x -= 101;
+                    jumpSound.play();
                     console.log('left');
                 }
                 break;
             case 'up':
                 if (this.y >= 83) {
                     this.y -= 83;
+                    jumpSound.play();
                     console.log('up');
                 }
                 break;
             case 'right':
                 if (this.x <= 303) {
                     this.x += 101;
+                    jumpSound.play();
                     console.log('right');
                 }
                 break;
             case 'down':
                 if (this.y <= 332) {
                     this.y += 83;
+                    jumpSound.play();
                     console.log('down');
                 }
                 break;
