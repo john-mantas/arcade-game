@@ -139,6 +139,15 @@ var Engine = function(global) {
             }
         }
 
+        // Draw the score indication board
+        ctx.drawImage(Resources.get('images/gui/sign.png'),404,0,101,50);
+        ctx.fillText(totalScore,454.5,31);
+        
+        //Font style for canvas text
+        ctx.font = '20px funhouse';
+        ctx.fillStyle = 'white';
+        ctx.textAlign = 'center';
+        
         renderEntities();
     }
 
@@ -178,7 +187,8 @@ var Engine = function(global) {
         'images/char-cat-girl.png',
         'images/char-horn-girl.png',
         'images/char-pink-girl.png',
-        'images/char-princess-girl.png'
+        'images/char-princess-girl.png',
+        'images/gui/sign.png'
     ]);
     Resources.onReady(init);
 

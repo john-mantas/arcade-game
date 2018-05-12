@@ -21,7 +21,7 @@ arrowLeft.addEventListener('click', function() {
 });
 
 arrowRight.addEventListener('click', function() {
-     if (charIndex === playerCharacters.length-1) {
+    if (charIndex === playerCharacters.length-1) {
         charIndex = -1;
     }
     charIndex++
@@ -76,6 +76,7 @@ Enemy.prototype.render = function() {
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
+let totalScore = 0;
 
 class Player {
     constructor(x,y) {
@@ -86,10 +87,9 @@ class Player {
 
     update() {
         if (this.y === 0) {
-            setTimeout(function() {
-                player.resetToStart()
-            }, 300);
+            player.resetToStart()
             console.log('win');
+            totalScore += 100;
         }
     }
 
