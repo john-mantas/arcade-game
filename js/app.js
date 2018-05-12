@@ -28,6 +28,13 @@ arrowRight.addEventListener('click', function() {
     charCont.setAttribute('src', playerCharacters[charIndex]);
 });
 
+//Home screen - Play button
+document.getElementById('home_play').addEventListener('click', function() {
+    player.sprite = charCont.getAttribute('src');
+    document.getElementById('home_screen').classList.add('is-hidden');
+    Engine(global);
+});
+
 // Enemies our player must avoid
 var Enemy = function(x, y, speed) {
     // Variables applied to each of our instances go here,

@@ -27,6 +27,11 @@ body {
     background-size: cover;
 }
 
+.home.is-hidden {
+    opacity: 0;
+    transition: 0.25s;
+}
+
 .game-title {
     font-family: funhouse, sans-serif;
     font-size: 70px;
