@@ -92,7 +92,7 @@ class Player {
     }
 
     update() {
-        if (this.y === 0) {
+        if (this.y === -20) {
             winSound.play();
             player.resetToStart()
             console.log('win');
@@ -114,7 +114,7 @@ class Player {
                 }
                 break;
             case 'up':
-                if (this.y >= 83) {
+                if (this.y >= 63) {
                     this.y -= 83;
                     jumpSound.play();
                     console.log('up');
@@ -128,7 +128,7 @@ class Player {
                 }
                 break;
             case 'down':
-                if (this.y <= 332) {
+                if (this.y <= 312) {
                     this.y += 83;
                     jumpSound.play();
                     console.log('down');
@@ -139,7 +139,7 @@ class Player {
 
     resetToStart() {
         this.x = 202;
-        this.y = 332;
+        this.y = 312;
     }
 }
 
@@ -148,13 +148,13 @@ class Player {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
-const enemyTop = new Enemy(-101, 83 , getRandom(100,300));
-const enemyMiddle = new Enemy(-101, 166, getRandom(100,300));
-const enemyBottom = new Enemy(-101, 249, getRandom(100,300));
+const enemyTop = new Enemy(-101, 63 , getRandom(100,300));
+const enemyMiddle = new Enemy(-101, 146, getRandom(100,300));
+const enemyBottom = new Enemy(-101, 229, getRandom(100,300));
 
 let allEnemies = [enemyTop, enemyMiddle, enemyBottom];
 
-const player = new Player(202, 332);
+const player = new Player(202, 312);
 
 //Randomize function from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
 function getRandom(min, max) {
