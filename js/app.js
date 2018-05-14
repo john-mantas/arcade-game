@@ -71,6 +71,7 @@ Enemy.prototype.update = function(dt) {
         player.resetToStart();
         collisionSound.play();
         console.log('collision');
+        player.lifes--;
     }
 };
 
@@ -89,6 +90,7 @@ class Player {
         this.sprite = 'images/char-boy.png';
         this.x = x;
         this.y = y;
+        this.lifes = 3;
     }
 
     update() {
@@ -98,10 +100,19 @@ class Player {
             console.log('win');
             totalScore += 100;
         }
+
+        if (this.lifes === 0) {
+            console.log('dead');
+            stop = true;
+        }
     }
 
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+
+        for (let i=0; i<=this.lifes-1; i++) {
+            ctx.drawImage(Resources.get('images/Heart.png'), (i*35), 0, 30, 50);
+        };
     }
 
     handleInput(keyPressed) {

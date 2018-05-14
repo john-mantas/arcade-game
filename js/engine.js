@@ -12,7 +12,9 @@
  * This engine makes the canvas' context (ctx) object globally available to make 
  * writing app.js a little simpler to work with.
  */
-var global = this;
+var global = this,
+    stop = false,
+    raf;
 
 var Engine = function(global) {
     /* Predefine the variables we'll be using within this scope,
@@ -56,7 +58,11 @@ var Engine = function(global) {
         /* Use the browser's requestAnimationFrame function to call this
          * function again as soon as the browser is able to draw another frame.
          */
-        win.requestAnimationFrame(main);
+        raf = win.requestAnimationFrame(main);
+
+        if (stop) {
+            cancelAnimationFrame(raf);
+        }
     }
 
     /* This function does some initial setup that should only occur once,
@@ -188,7 +194,8 @@ var Engine = function(global) {
         'images/char-horn-girl.png',
         'images/char-pink-girl.png',
         'images/char-princess-girl.png',
-        'images/gui/sign.png'
+        'images/gui/sign.png',
+        'images/Heart.png'
     ]);
     Resources.onReady(init);
 
