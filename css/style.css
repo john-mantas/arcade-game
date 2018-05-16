@@ -29,7 +29,8 @@ body {
 
 .home.is-hidden {
     opacity: 0;
-    transition: 0.25s;
+    visibility: hidden;
+    transition: 0.5s;
 }
 
 .game-title {
