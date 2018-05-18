@@ -1,3 +1,20 @@
+* {
+    box-sizing: border-box;
+    transition: 0.1s;
+}
+
+button {
+    border: none;
+    background: none;
+    outline: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+button:active {
+    transform: scale(1.1,0.9);
+}
+
 body {
     display: flex;
     width: 100%;
@@ -43,8 +60,8 @@ body {
 
 .player-select {
     position: relative;
-    width: 101px;
-    height: 171px;
+    width: 141px;
+    height: 211px;
     padding: 10px;
     margin: auto;
     background-color: rgba(255, 128, 21, 0.8);
@@ -74,12 +91,6 @@ body {
     top: 75px;
     width: 40px;
     height: 50px;
-    cursor: pointer;
-}
-
-.arrow-left:active,
-.arrow-right:active {
-    transform: scale(0.9);
 }
 
 .arrow-left {
@@ -97,15 +108,69 @@ body {
     font-size: 40px;
     font-family: funhouse, sans-serif;
     text-shadow: 0 0 3px #333;
-    color: white;
-    background: none;
-    border: none;
     background-image: url(../images/gui/sign.png);
     background-size: 100% 100%;
-    outline: none;
-    cursor: pointer;
 }
 
-.button-play:active {
-    transform: scale(0.95);
+.footer {
+    align-self: end;
+    margin: 15px;
+    text-align: center;
+    font-family: funhouse, sans-serif;
+    font-size: 26px;
+    color: #fff;
+}
+
+.footer button {
+    margin: 0 15px;
+}
+
+.modal {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: 700px;
+    height: 500px;
+    padding: 60px;
+    z-index: 100;
+    text-align: center;
+    font-family: funhouse, sans-serif;
+    font-size: 26px;
+    color: rgb(255, 94, 8);
+    background-image: url(../images/gui/box.png);
+    background-size: 100% 100%;
+    opacity: 0;
+    visibility: hidden;
+    transform:scale(0.8);
+    transition: 0.3s;
+}
+
+.modal.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform:scale(1);
+}
+
+.modal__title {
+    text-align: center;
+}
+
+.modal__content {
+    margin: auto;
+    overflow-y: auto;
+}
+
+.modal__content p {
+    margin: 0.5em 0;
+}
+
+.modal__buttons {
+    margin-top: 10px;
+}
+
+.modal__button {
+    padding: 7px 20px;
+    color: rgb(255, 240, 191);
+    background: rgb(255,94,8);
+    border-radius: 10px;
 }
