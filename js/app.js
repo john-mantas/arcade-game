@@ -35,6 +35,36 @@ document.getElementById('home_play').addEventListener('click', function() {
     Engine(global);
 });
 
+//Modals
+let modal = document.getElementById('modal');
+let modalTitle = document.getElementById('modal_title');
+let modalContent = document.getElementById('modal_content');
+let modalClose = document.getElementById('modal_close');
+
+modalClose.addEventListener('click', () => {
+    modal.classList.remove('is-open');
+    modalTitle.innerHTML = '';
+    modalContent.innerHTML = ''; 
+});
+
+function setModalData(cd='empty') {
+    console.log(cd);
+    modalTitle.innerHTML = modal_data[cd].title;
+    modalContent.innerHTML = modal_data[cd].content;
+}
+
+let footerCredits = document.getElementById('footer_credits');
+footerCredits.addEventListener('click', function() {
+    setModalData('credits');
+    modal.classList.add('is-open');
+});
+
+let footerHowto = document.getElementById('footer_howto');
+footerHowto.addEventListener('click', function() {
+    setModalData('howToPlay');
+    modal.classList.add('is-open');
+});
+
 // Game sounds
 let jumpSound = new Audio('sounds/jump.wav');
 let winSound = new Audio('sounds/win.wav');

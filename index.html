@@ -18,23 +18,20 @@
                 <button class="button-play" id="home_play">PLAY</button>
             </div>
             <div class="footer">
-                <button>Credits</button>
-                <button>How to play</button>
+                <button id="footer_credits">Credits</button>
+                <button id="footer_howto">How to play</button>
             </div>
         </section>
-        <script src="js/resources.js"></script>
-        <script src="js/app.js"></script>
-        <script src="js/engine.js"></script>
         <div class="modal" id="modal">
-            <h2 class="modal__title" id="modal_title">Credits</h2>
-            <div class="modal__content" id="modal_content">
-                <p>made with <span style="color: #b22222">❤</span> by john mantas</p>
-                <p>Project from Udacity Fend Nanodegree</p>
-                <p>2018 @ Athens, Greece</p>
-            </div>
+            <h2 class="modal__title" id="modal_title"></h2>
+            <div class="modal__content" id="modal_content"></div>
             <div class="modal__buttons">
-                <button class="modal__button">Close</button>
+                <button class="modal__button" id="modal_close">Close</button>
             </div>
         </div>
+        <script src="js/resources.js"></script>
+        <script src="js/modal-data.json"></script>
+        <script src="js/app.js"></script>
+        <script src="js/engine.js"></script>
     </body>
 </html>
