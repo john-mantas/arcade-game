@@ -14,7 +14,8 @@
  */
 var global = this,
     stop = true,
-    raf;
+    raf,
+    init;
 
 var Engine = function(global) {
     /* Predefine the variables we'll be using within this scope,
@@ -71,7 +72,7 @@ var Engine = function(global) {
      * particularly setting the lastTime variable that is required for the
      * game loop.
      */
-    function init() {
+    init = function() {
         reset();
         lastTime = Date.now();
         main();
@@ -116,17 +117,17 @@ var Engine = function(global) {
          * for that particular row of the game level.
          */
         var rowImages = [
-                'images/water-block.png',   // Top row is water
-                'images/stone-block.png',   // Row 1 of 3 of stone
-                'images/stone-block.png',   // Row 2 of 3 of stone
-                'images/stone-block.png',   // Row 3 of 3 of stone
-                'images/grass-block.png',   // Row 1 of 2 of grass
-                'images/grass-block.png'    // Row 2 of 2 of grass
-            ],
+            'images/water-block.png',   // Top row is water
+            'images/stone-block.png',   // Row 1 of 3 of stone
+            'images/stone-block.png',   // Row 2 of 3 of stone
+            'images/stone-block.png',   // Row 3 of 3 of stone
+            'images/grass-block.png',   // Row 1 of 2 of grass
+            'images/grass-block.png'    // Row 2 of 2 of grass
+        ],
             numRows = 6,
             numCols = 5,
             row, col;
-        
+
         // Before drawing, clear existing canvas
         ctx.clearRect(0,0,canvas.width,canvas.height)
 
@@ -150,12 +151,12 @@ var Engine = function(global) {
         // Draw the score indication board
         ctx.drawImage(Resources.get('images/gui/sign.png'),404,0,101,50);
         ctx.fillText(totalScore,454.5,31);
-        
+
         //Font style for canvas text
         ctx.font = '20px funhouse';
         ctx.fillStyle = 'white';
         ctx.textAlign = 'center';
-        
+
         renderEntities();
     }
 
@@ -180,6 +181,9 @@ var Engine = function(global) {
      */
     function reset() {
         // noop
+        stop = false;
+        player.lifes = 3;
+        totalScore = 0;
     }
 
     /* Go ahead and load all of the images we know we're going to need to

@@ -39,7 +39,10 @@ document.getElementById('home_play').addEventListener('click', function() {
 let modal = document.getElementById('modal');
 let modalTitle = document.getElementById('modal_title');
 let modalContent = document.getElementById('modal_content');
+let modalMenu = document.getElementById('modal_menu');
+let modalPlay = document.getElementById('modal_play');
 let modalClose = document.getElementById('modal_close');
+let modalButtons = [modalMenu, modalPlay, modalClose];
 
 modalClose.addEventListener('click', () => {
     modal.classList.remove('is-open');
@@ -47,10 +50,33 @@ modalClose.addEventListener('click', () => {
     modalContent.innerHTML = ''; 
 });
 
+modalMenu.addEventListener('click', () => {
+    modal.classList.remove('is-open');
+    document.getElementById('home_screen').classList.remove('is-hidden');
+    document.querySelector('canvas').remove();
+});
+
+modalPlay.addEventListener('click', () => {
+    modal.classList.remove('is-open');
+    document.querySelector('canvas').remove();
+    Engine(global);
+    init();
+});
+
 function setModalData(cd='empty') {
     console.log(cd);
     modalTitle.innerHTML = modal_data[cd].title;
     modalContent.innerHTML = modal_data[cd].content;
+    
+    for (let btn of modalButtons) {
+        btn.style.display = 'none';
+        for (let activeBtn of modal_data[cd].buttons) {
+            if (btn.id === activeBtn) {
+                console.log(activeBtn);
+                btn.style.display = 'inline-block';
+            }
+        }
+    }
 }
 
 let footerCredits = document.getElementById('footer_credits');
@@ -120,7 +146,7 @@ class Player {
         this.sprite = 'images/char-boy.png';
         this.x = x;
         this.y = y;
-        this.lifes = 3;
+        this.lifes;
     }
 
     update() {
