@@ -16,5 +16,9 @@ var modal_data = {
                     <p>When you are on the grass you are safe</p>
                     <p>Avoid the bugs, they will eat your life <br> you only start with 3</p>
                     <p>To play select your character and press enter or the start button</p>`
+    },
+    "died": {
+        "title": "You died!",
+        "content": `<p>Your total score is ${totalScore}</p>`
     }
 };

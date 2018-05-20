@@ -134,6 +134,8 @@ class Player {
         if (this.lifes === 0) {
             console.log('dead');
             stop = true;
+            setModalData('died');
+            modal.classList.add('is-open');
         }
     }
 
