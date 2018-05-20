@@ -51,9 +51,7 @@ modalClose.addEventListener('click', () => {
 });
 
 modalMenu.addEventListener('click', () => {
-    modal.classList.remove('is-open');
-    document.getElementById('home_screen').classList.remove('is-hidden');
-    document.querySelector('canvas').remove();
+    window.location.reload();
 });
 
 modalPlay.addEventListener('click', () => {
