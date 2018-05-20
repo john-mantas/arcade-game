@@ -22,7 +22,7 @@ var modal_data = {
     },
     "died": {
         "title": "You died!",
-        "content": `<p>Your total score is ${totalScore}</p>`,
+        "content": `<p>You scored <span id="final_score"></span> points</p>`,
         "buttons": ["modal_menu","modal_play"]
     }
 };

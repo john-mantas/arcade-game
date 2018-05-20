@@ -161,6 +161,7 @@ class Player {
             console.log('dead');
             stop = true;
             setModalData('died');
+            document.getElementById('final_score').innerHTML = totalScore;
             modal.classList.add('is-open');
         }
     }
