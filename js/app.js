@@ -62,7 +62,6 @@ modalPlay.addEventListener('click', () => {
 });
 
 function setModalData(cd='empty') {
-    console.log(cd);
     modalTitle.innerHTML = modal_data[cd].title;
     modalContent.innerHTML = modal_data[cd].content;
 
@@ -70,7 +69,6 @@ function setModalData(cd='empty') {
         btn.style.display = 'none';
         for (let activeBtn of modal_data[cd].buttons) {
             if (btn.id === activeBtn) {
-                console.log(activeBtn);
                 btn.style.display = 'inline-block';
             }
         }
@@ -124,7 +122,6 @@ Enemy.prototype.update = function(dt) {
         this.y === player.y) {
         player.resetToStart();
         collisionSound.play();
-        console.log('collision');
         player.lifes--;
     }
 };
@@ -151,12 +148,10 @@ class Player {
         if (this.y === -20) {
             winSound.play();
             player.resetToStart()
-            console.log('win');
             totalScore += 100;
         }
 
         if (this.lifes === 0) {
-            console.log('dead');
             stop = true;
             setModalData('died');
             document.getElementById('final_score').innerHTML = totalScore;
@@ -178,28 +173,24 @@ class Player {
                 if (this.x >= 101) {
                     this.x -= 101;
                     jumpSound.play();
-                    console.log('left');
                 }
                 break;
             case 'up':
                 if (this.y >= 63) {
                     this.y -= 83;
                     jumpSound.play();
-                    console.log('up');
                 }
                 break;
             case 'right':
                 if (this.x <= 303) {
                     this.x += 101;
                     jumpSound.play();
-                    console.log('right');
                 }
                 break;
             case 'down':
                 if (this.y <= 312) {
                     this.y += 83;
                     jumpSound.play();
-                    console.log('down');
                 }
                 break;
         }
@@ -271,7 +262,6 @@ function* pushPowerUps(p) {
 
 for (let power of setPu) {
     pushPowerUps(power).next();
-    console.log(power);
 }
 
 //Randomize function from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
