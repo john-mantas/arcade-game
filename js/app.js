@@ -65,7 +65,7 @@ function setModalData(cd='empty') {
     console.log(cd);
     modalTitle.innerHTML = modal_data[cd].title;
     modalContent.innerHTML = modal_data[cd].content;
-    
+
     for (let btn of modalButtons) {
         btn.style.display = 'none';
         for (let activeBtn of modal_data[cd].buttons) {
@@ -168,7 +168,7 @@ class Player {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 
         for (let i=0; i<=this.lifes-1; i++) {
-            ctx.drawImage(Resources.get('images/Heart.png'), (i*35), 0, 30, 50);
+            ctx.drawImage(Resources.get('images/heart-small.png'), (i*32), 0, 35, 60);
         };
     }
 
@@ -211,6 +211,37 @@ class Player {
     }
 }
 
+//Power-ups
+class powerUp {
+    constructor(obj) {
+        this.item = obj;
+        this.sprite = this.item.sprite;
+        this.x = getRandom(0,4)*101;
+        this.y = getRandom(1,3)*83;
+        this.storeIt = false;
+    }
+
+    render() {
+        if (this.storeIt){
+            ctx.drawImage(Resources.get(this.sprite),this.x,this.y, 35,65);
+        } else {
+            ctx.drawImage(Resources.get(this.sprite),this.x,this.y);
+        }
+    }
+
+    update() {
+        if (this.x === player.x && this.y === player.y+20) {
+            this.addPower();
+            this.x = 0;
+            this.y = 532;
+            this.storeIt = true;
+        }
+    }
+
+    addPower() {
+        eval(this.item.power);
+    }
+}
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
@@ -223,6 +254,25 @@ const enemyBottom = new Enemy(-101, 229, getRandom(100,300));
 let allEnemies = [enemyTop, enemyMiddle, enemyBottom];
 
 const player = new Player(202, 312);
+
+let allPowerUps = [];
+let setPu = new Set();
+setPu.add(new powerUp(powerUp_data.gemBlue));
+setPu.add(new powerUp(powerUp_data.gemGreen));
+setPu.add(new powerUp(powerUp_data.gemOrange));
+setPu.add(new powerUp(powerUp_data.life));
+
+function* pushPowerUps(p) {
+    setTimeout(function() {
+        allPowerUps.push(p);
+    },getRandom(10000,20000));
+    yield;
+}
+
+for (let power of setPu) {
+    pushPowerUps(power).next();
+    console.log(power);
+}
 
 //Randomize function from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
 function getRandom(min, max) {

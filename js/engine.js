@@ -104,6 +104,10 @@ var Engine = function(global) {
             enemy.update(dt);
         });
         player.update();
+
+        allPowerUps.forEach(function(pu) {
+            pu.update();
+        });
     }
 
     /* This function initially draws the "game level", it will then call
@@ -173,6 +177,10 @@ var Engine = function(global) {
         });
 
         player.render();
+
+        allPowerUps.forEach(function(pu) {
+            pu.render();
+        });
     }
 
     /* This function does nothing but it could have been a good place to
@@ -201,7 +209,10 @@ var Engine = function(global) {
         'images/char-pink-girl.png',
         'images/char-princess-girl.png',
         'images/gui/sign.png',
-        'images/Heart.png'
+        'images/heart-small.png',
+        'images/gem-blue.png',
+        'images/gem-green.png',
+        'images/gem-orange.png'
     ]);
     Resources.onReady(init);
 

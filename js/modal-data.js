@@ -26,3 +26,22 @@ var modal_data = {
         "buttons": ["modal_menu","modal_play"]
     }
 };
+
+var powerUp_data = {
+    "life": {
+        "sprite": "images/heart-small.png",
+        "power": `player.lifes += 1`
+    },
+    "gemBlue": {
+        "sprite": "images/gem-blue.png",
+        "power": `totalScore += 60`
+    },
+    "gemGreen": {
+        "sprite": "images/gem-green.png",
+        "power": `totalScore += 40`
+    },
+    "gemOrange": {
+        "sprite": "images/gem-orange.png",
+        "power": `totalScore += 20`
+    }
+};
