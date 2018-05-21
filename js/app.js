@@ -1,4 +1,6 @@
-//Home screen
+let totalScore = 0;
+
+//Home screen character selection
 const charCont = document.getElementById('character');
 const arrowLeft = document.getElementById('arrow_left');
 const arrowRight = document.getElementById('arrow_right');
@@ -44,6 +46,24 @@ let modalPlay = document.getElementById('modal_play');
 let modalClose = document.getElementById('modal_close');
 let modalButtons = [modalMenu, modalPlay, modalClose];
 
+/**
+* @description Set each time the corresponding data for the modals
+* @param {string} cd - case data, which case should load
+*/
+function setModalData(cd='empty') {
+    modalTitle.innerHTML = modal_data[cd].title;
+    modalContent.innerHTML = modal_data[cd].content;
+
+    for (let btn of modalButtons) {
+        btn.style.display = 'none';
+        for (let activeBtn of modal_data[cd].buttons) {
+            if (btn.id === activeBtn) {
+                btn.style.display = 'inline-block';
+            }
+        }
+    }
+}
+
 modalClose.addEventListener('click', () => {
     modal.classList.remove('is-open');
     modalTitle.innerHTML = '';
@@ -61,20 +81,6 @@ modalPlay.addEventListener('click', () => {
     init();
 });
 
-function setModalData(cd='empty') {
-    modalTitle.innerHTML = modal_data[cd].title;
-    modalContent.innerHTML = modal_data[cd].content;
-
-    for (let btn of modalButtons) {
-        btn.style.display = 'none';
-        for (let activeBtn of modal_data[cd].buttons) {
-            if (btn.id === activeBtn) {
-                btn.style.display = 'inline-block';
-            }
-        }
-    }
-}
-
 let footerCredits = document.getElementById('footer_credits');
 footerCredits.addEventListener('click', function() {
     setModalData('credits');
@@ -87,30 +93,27 @@ footerHowto.addEventListener('click', function() {
     modal.classList.add('is-open');
 });
 
-// Game sounds
+// Game sounds used inside the game
 let jumpSound = new Audio('sounds/jump.wav');
 let winSound = new Audio('sounds/win.wav');
 let collisionSound = new Audio('sounds/collision.wav');
 
-// Enemies our player must avoid
+/**
+* @description The enemies of the game
+* @constructor
+* @param {number} x - The x coordinate of the enemy
+* @param {number} y - The y coordinate of the enemy
+* @param {number} speed - The speed that our enemy will run
+*/
 var Enemy = function(x, y, speed) {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
-
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
     this.x = x;
     this.y = y;
     this.speed = speed;
 };
 
-// Update the enemy's position, required method for game
-// Parameter: dt, a time delta between ticks
+//Set the speed of the enemies, make them cross the screen and check for collisions with the player
 Enemy.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
     this.x = this.x + this.speed * dt;
 
     if (this.x > 505) {
@@ -126,16 +129,17 @@ Enemy.prototype.update = function(dt) {
     }
 };
 
-// Draw the enemy on the screen, required method for game
+//Render the enemies on the canvas
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
-let totalScore = 0;
-
+/**
+* @description Our player for the game
+* @class
+* @param {number} x - The x coordinate of the player
+* @param {number} y - The y coordinate of the player
+*/
 class Player {
     constructor(x,y) {
         this.sprite = 'images/char-boy.png';
@@ -144,6 +148,7 @@ class Player {
         this.lifes;
     }
 
+    //Check if the player reached the goal and if is still alive
     update() {
         if (this.y === -20) {
             winSound.play();
@@ -159,6 +164,7 @@ class Player {
         }
     }
 
+    //Render the player and how mane lives left on the canvas
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 
@@ -167,6 +173,7 @@ class Player {
         };
     }
 
+    //Provide the controls for the game
     handleInput(keyPressed) {
         switch (keyPressed) {
             case 'left':
@@ -196,13 +203,18 @@ class Player {
         }
     }
 
+    //Take player to it's initial location
     resetToStart() {
         this.x = 202;
         this.y = 312;
     }
 }
 
-//Power-ups
+/**
+* @description Power ups used in the game
+* @class
+* @param {object} obj - The object that loads the values
+*/
 class powerUp {
     constructor(obj) {
         this.item = obj;
@@ -212,6 +224,7 @@ class powerUp {
         this.storeIt = false;
     }
 
+    //Render the power-ups on the canvas
     render() {
         if (this.storeIt){
             ctx.drawImage(Resources.get(this.sprite),this.x,this.y, 35,65);
@@ -220,6 +233,7 @@ class powerUp {
         }
     }
 
+    //Check if the player has hit a power-up
     update() {
         if (this.x === player.x && this.y === player.y+20) {
             this.addPower();
@@ -229,15 +243,13 @@ class powerUp {
         }
     }
 
+    //Add the power to the player
     addPower() {
         eval(this.item.power);
     }
 }
 
-// Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
-
+//Instantianting enemies, player and power-ups
 const enemyTop = new Enemy(-101, 63 , getRandom(100,300));
 const enemyMiddle = new Enemy(-101, 146, getRandom(100,300));
 const enemyBottom = new Enemy(-101, 229, getRandom(100,300));
@@ -253,6 +265,12 @@ setPu.add(new powerUp(powerUp_data.gemGreen));
 setPu.add(new powerUp(powerUp_data.gemOrange));
 setPu.add(new powerUp(powerUp_data.life));
 
+/**
+* @description Push the power-ups with delay to an array for rendering
+* @generator
+* @function pushPowerUps
+* @param {p} - Each item to push to the array
+*/
 function* pushPowerUps(p) {
     setTimeout(function() {
         allPowerUps.push(p);
@@ -260,6 +278,7 @@ function* pushPowerUps(p) {
     yield;
 }
 
+//Add all power-ups to the array for rendering
 for (let power of setPu) {
     pushPowerUps(power).next();
 }
@@ -271,8 +290,7 @@ function getRandom(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-// This listens for key presses and sends the keys to your
-// Player.handleInput() method. You don't need to modify this.
+//This listens for key presses and sends the keys to Player.handleInput() method.
 document.addEventListener('keyup', function(e) {
     if (!stop) {
         var allowedKeys = {
