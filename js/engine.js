@@ -103,7 +103,7 @@ var Engine = function(global) {
         allEnemies.forEach(function(enemy) {
             enemy.update(dt);
         });
-        player.update();
+        PLAYER.update();
 
         allPowerUps.forEach(function(pu) {
             pu.update();
@@ -176,7 +176,7 @@ var Engine = function(global) {
             enemy.render();
         });
 
-        player.render();
+        PLAYER.render();
 
         allPowerUps.forEach(function(pu) {
             pu.render();
@@ -190,7 +190,7 @@ var Engine = function(global) {
     function reset() {
         // noop
         stop = false;
-        player.lifes = 3;
+        PLAYER.lifes = 3;
         totalScore = 0;
     }
 

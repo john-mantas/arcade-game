@@ -30,7 +30,7 @@ var modal_data = {
 var powerUp_data = {
     "life": {
         "sprite": "images/heart-small.png",
-        "power": `player.lifes += 1`
+        "power": `PLAYER.lifes += 1`
     },
     "gemBlue": {
         "sprite": "images/gem-blue.png",

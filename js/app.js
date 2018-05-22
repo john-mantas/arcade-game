@@ -1,10 +1,10 @@
 let totalScore = 0;
 
 //Home screen character selection
-const charCont = document.getElementById('character');
-const arrowLeft = document.getElementById('arrow_left');
-const arrowRight = document.getElementById('arrow_right');
-const playerCharacters = [
+const CHAR_CONT = document.getElementById('character');
+const ARROW_LEFT = document.getElementById('arrow_left');
+const ARROW_RIGHT = document.getElementById('arrow_right');
+const PLAYER_CHARACTERS = [
     'images/char-boy.png',
     'images/char-cat-girl.png',
     'images/char-horn-girl.png',
@@ -14,25 +14,25 @@ const playerCharacters = [
 
 let charIndex = 0;
 
-arrowLeft.addEventListener('click', function() {
+ARROW_LEFT.addEventListener('click', function() {
     if (charIndex === 0) {
-        charIndex = playerCharacters.length;
+        charIndex = PLAYER_CHARACTERS.length;
     }
     charIndex--
-    charCont.setAttribute('src', playerCharacters[charIndex]);
+    CHAR_CONT.setAttribute('src', PLAYER_CHARACTERS[charIndex]);
 });
 
-arrowRight.addEventListener('click', function() {
-    if (charIndex === playerCharacters.length-1) {
+ARROW_RIGHT.addEventListener('click', function() {
+    if (charIndex === PLAYER_CHARACTERS.length-1) {
         charIndex = -1;
     }
     charIndex++
-    charCont.setAttribute('src', playerCharacters[charIndex]);
+    CHAR_CONT.setAttribute('src', PLAYER_CHARACTERS[charIndex]);
 });
 
 //Home screen - Play button
 document.getElementById('home_play').addEventListener('click', function() {
-    player.sprite = charCont.getAttribute('src');
+    PLAYER.sprite = CHAR_CONT.getAttribute('src');
     document.getElementById('home_screen').classList.add('is-hidden');
     Engine(global);
 });
@@ -120,12 +120,12 @@ Enemy.prototype.update = function(dt) {
         this.x = -101;
     }
 
-    if (((parseInt(this.x + 70) > player.x && parseInt(this.x) < player.x) ||
-         (parseInt(this.x + 70) > player.x + 70 && parseInt(this.x) < player.x + 70)) &&
-        this.y === player.y) {
-        player.resetToStart();
+    if (((parseInt(this.x + 70) > PLAYER.x && parseInt(this.x) < PLAYER.x) ||
+         (parseInt(this.x + 70) > PLAYER.x + 70 && parseInt(this.x) < PLAYER.x + 70)) &&
+        this.y === PLAYER.y) {
+        PLAYER.resetToStart();
         collisionSound.play();
-        player.lifes--;
+        PLAYER.lifes--;
     }
 };
 
@@ -152,7 +152,7 @@ class Player {
     update() {
         if (this.y === -20) {
             winSound.play();
-            player.resetToStart()
+            this.resetToStart()
             totalScore += 100;
         }
 
@@ -164,7 +164,7 @@ class Player {
         }
     }
 
-    //Render the player and how mane lives left on the canvas
+    //Render the player and how many lives left on the canvas
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 
@@ -215,7 +215,7 @@ class Player {
 * @class
 * @param {object} obj - The object that loads the values
 */
-class powerUp {
+class PowerUp {
     constructor(obj) {
         this.item = obj;
         this.sprite = this.item.sprite;
@@ -235,7 +235,7 @@ class powerUp {
 
     //Check if the player has hit a power-up
     update() {
-        if (this.x === player.x && this.y === player.y+20) {
+        if (this.x === PLAYER.x && this.y === PLAYER.y+20) {
             this.addPower();
             this.x = 0;
             this.y = 532;
@@ -250,20 +250,20 @@ class powerUp {
 }
 
 //Instantianting enemies, player and power-ups
-const enemyTop = new Enemy(-101, 63 , getRandom(100,300));
-const enemyMiddle = new Enemy(-101, 146, getRandom(100,300));
-const enemyBottom = new Enemy(-101, 229, getRandom(100,300));
+const ENEMY_TOP = new Enemy(-101, 63 , getRandom(100,300));
+const ENEMY_MIDDLE = new Enemy(-101, 146, getRandom(100,300));
+const ENEMY_BOTTOM = new Enemy(-101, 229, getRandom(100,300));
 
-let allEnemies = [enemyTop, enemyMiddle, enemyBottom];
+let allEnemies = [ENEMY_TOP, ENEMY_MIDDLE, ENEMY_BOTTOM];
 
-const player = new Player(202, 312);
+const PLAYER = new Player(202, 312);
 
 let allPowerUps = [];
 let setPu = new Set();
-setPu.add(new powerUp(powerUp_data.gemBlue));
-setPu.add(new powerUp(powerUp_data.gemGreen));
-setPu.add(new powerUp(powerUp_data.gemOrange));
-setPu.add(new powerUp(powerUp_data.life));
+setPu.add(new PowerUp(powerUp_data.gemBlue));
+setPu.add(new PowerUp(powerUp_data.gemGreen));
+setPu.add(new PowerUp(powerUp_data.gemOrange));
+setPu.add(new PowerUp(powerUp_data.life));
 
 /**
 * @description Push the power-ups with delay to an array for rendering
@@ -300,6 +300,6 @@ document.addEventListener('keyup', function(e) {
             40: 'down'
         };
 
-        player.handleInput(allowedKeys[e.keyCode]);
+        PLAYER.handleInput(allowedKeys[e.keyCode]);
     }
 });
