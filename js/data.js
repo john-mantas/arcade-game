@@ -13,11 +13,11 @@ var modal_data = {
     },
     "howToPlay": {
         "title": "How to play",
-        "content": `<p>The goal is to reach the water and collect points,
-                        use the arrow keys to navigate to the top</p>
-                    <p>When you are on the grass you are safe</p>
-                    <p>Avoid the bugs, they will eat your life <br> you only start with 3</p>
-                    <p>To play select your character and press enter or the start button</p>`,
+        "content": `<p>At the start screen select your players character and press the PLAY button</p>
+                    <p>When the game starts you can use your keyboards arrows to move the player across the field</p>
+                    <p>The player starts with three lifes and loses one each time that get hit by an enemy</p>
+                    <p>At random times extra life and gems will appear in the game, each with different bonus for the player</p>
+                    <p>The goal of the game is to reach to the top without getting hit as many times possible and ends when there are no lives left for the player</p>`,
         "buttons": ["modal_close"]
     },
     "died": {
@@ -30,7 +30,7 @@ var modal_data = {
 var powerUp_data = {
     "life": {
         "sprite": "images/heart-small.png",
-        "power": `PLAYER.lifes += 1`
+        "power": `PLAYER.lives += 1`
     },
     "gemBlue": {
         "sprite": "images/gem-blue.png",

@@ -30,11 +30,11 @@ At the start screen select your players character and press the **PLAY** button
 
 When the game starts you can use your keyboards arrows to move the player across the field
 
-The player starts with three lifes and loses one each time that get hit by an enemy
+The player starts with three lives and loses one each time that get hit by an enemy
 
 At random times extra life and gems will appear in the game, each with different bonus for the player
 
-The game ends when there are no lifes left for the player
+The game ends when there are no lives left for the player
 
 ## Built with
 * HTML5

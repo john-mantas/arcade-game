@@ -76,6 +76,7 @@ var Engine = function(global) {
         reset();
         lastTime = Date.now();
         main();
+        playPowerUps();
     }
 
     /* This function is called by main (our game loop) and itself calls all
@@ -133,7 +134,7 @@ var Engine = function(global) {
             row, col;
 
         // Before drawing, clear existing canvas
-        ctx.clearRect(0,0,canvas.width,canvas.height)
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
 
         /* Loop through the number of rows and columns we've defined above
          * and, using the rowImages array, draw the correct image for that
@@ -153,8 +154,8 @@ var Engine = function(global) {
         }
 
         // Draw the score indication board
-        ctx.drawImage(Resources.get('images/gui/sign.png'),404,0,101,50);
-        ctx.fillText(totalScore,454.5,31);
+        ctx.drawImage(Resources.get('images/gui/sign.png'), 404, 0, 101, 50);
+        ctx.fillText(totalScore, 454.5, 31);
 
         //Font style for canvas text
         ctx.font = '20px funhouse';
@@ -188,9 +189,8 @@ var Engine = function(global) {
      * those sorts of things. It's only called once by the init() method.
      */
     function reset() {
-        // noop
         stop = false;
-        PLAYER.lifes = 3;
+        PLAYER.lives = 3;
         totalScore = 0;
     }
 

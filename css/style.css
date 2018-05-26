@@ -31,6 +31,7 @@ body {
     src: url(../fonts/funhouse.ttf);
 }
 
+/* ---------- Start screen ---------- */
 .home {
     position: absolute;
     top: 0;
@@ -115,6 +116,7 @@ body {
     background-size: 100% 100%;
 }
 
+/* ---------- Footer ---------- */
 .footer {
     align-self: end;
     margin: 15px;
@@ -128,6 +130,7 @@ body {
     margin: 0 15px;
 }
 
+/* ---------- Modals ---------- */
 .modal {
     position: absolute;
     display: flex;
@@ -164,7 +167,17 @@ body {
 }
 
 .modal__content p {
-    margin: 0.5em 0;
+    position: relative;
+    margin: 1.5em 0;
+}
+
+.modal__content p:not(:last-child)::after {
+    position: absolute;
+    bottom: -0.75em;
+    left: 33%;
+    content: "";
+    width: 33%;
+    border-top: 5px dotted rgb(255, 94, 8);
 }
 
 .modal__buttons {
